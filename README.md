@@ -6,7 +6,7 @@ A [demo is here](http://desolate-garden-4742.herokuapp.com/).
 TODO
 ====
 
-[![Stories in Ready](https://badge.waffle.io/bikesafety/bikesafety.svg?label=ready&title=Ready)](http://waffle.io/bikesafety/bikesafety).
+[![Stories in Ready](https://badge.waffle.io/bikesafety/bikesafety.svg?label=ready&title=Ready)](http://waffle.io/bikesafety/bikesafety)
 
 Run
 ===
