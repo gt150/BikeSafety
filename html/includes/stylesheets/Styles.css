@@ -2,7 +2,12 @@ html, body, .container {
   height: 100%;
   width: 100%;
   padding: 0px;
-  overflow: hidden;
+}
+
+@media (max-width: 700px) {
+  #add_accident {
+    margin-top: 75px;
+  }
 }
 
 body {
@@ -57,7 +62,7 @@ body {
 }
 
 .inline {
-    display: inline;
+  display: inline;
 }
 
 .bikepath {
