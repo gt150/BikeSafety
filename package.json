@@ -1,7 +1,7 @@
 {
   "name": "BikeSafety",
-  "version": "0.0.1",
-  "author": "Sean Rycek, Dalton Shehan, Taylor Griffin, Ryan Adams",
+  "version": "0.0.2",
+  "author": "Sean Rycek, Dalton Shehan, Taylor Griffin, Ryan Adams, Dane Summers, Jeremy Neiman",
   "description": "An application to help bike riders analyze paths and find those that are safer than others",
   "contributors": [
     {
