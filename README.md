@@ -6,7 +6,6 @@ A [demo is here](http://desolate-garden-4742.herokuapp.com/).
 TODO
 ====
 
-[![Stories in Backlog](https://badge.waffle.io/bikesafety/bikesafety.svg?label=backlog&title=Backlog)](http://waffle.io/bikesafety/bikesafety).
 [![Stories in Ready](https://badge.waffle.io/bikesafety/bikesafety.svg?label=ready&title=Ready)](http://waffle.io/bikesafety/bikesafety).
 
 Run
@@ -14,6 +13,15 @@ Run
 
     npm install
     npm start
+
+Test
+====
+
+    npm test
+
+Under development you might want to rerun tests when files change:
+
+    npm run-script start-test
 
 TopoJSON
 ========

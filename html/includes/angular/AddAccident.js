@@ -58,8 +58,8 @@ var crashTemplate = {
 
 // TODO add deafult 'unknown' value to all the comboboxes.
 
-OCEM.controller('addAccidentController', ['$scope','getCrashesUserSubmitted','datasetSettings',
-function ($scope, getCrashesUserSubmitted, datasetSettings) {
+angular.module('BikeSafety').controller('addAccidentController', ['$scope','$location','getCrashesUserSubmitted','datasetSettings',
+function ($scope, $location, getCrashesUserSubmitted, datasetSettings) {
   $scope.questions = datasetSettings;
 
   $scope.ambulancer = false;
