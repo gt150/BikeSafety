@@ -22,7 +22,7 @@ function ($scope, leafletData) {
             .on('mouseout', function(d) {
               $scope.accident = null;
             })
-            .attr('opacity', 0.6)
+            .attr('opacity', 0.7)
             .attr('class','crash');
     };
 

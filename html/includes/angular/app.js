@@ -20,108 +20,137 @@ OCEM.config(['$routeProvider', '$locationProvider', function($routeProvider, $lo
 
 OCEM.service('datasetSettings', function() {
     var injuries = [
-        "Unknown",
-        "O: No Injury",
-        "A: Disabling Injury",
-        "B: Evident Injury",
-        "C: Possible Injury",
-        "K: Killed"
+        'Unknown',
+        'O: No Injury',
+        'A: Disabling Injury',
+        'B: Evident Injury',
+        'C: Possible Injury',
+        'K: Killed'
     ];
     var races = [
-        "Unknown",
-        "Asian",
-        "Black",
-        "Hispanic",
-        "White",
-        "Other"
+        'Unknown',
+        'Asian',
+        'Black',
+        'Hispanic',
+        'White',
+        'Other'
     ];
-    var genders = [ "Unknown", "Female", "Male" ];
+    var genders = [ 'Unknown', 'Female', 'Male' ];
+    var booleanColorsFunction = function(d) {
+        var booleanColors = {
+            Male: '#FA6019',
+            Female: '#4E98C6',
+            No: '#FA6019',
+            Yes: '#4E98C6',
+            Unknown: '#AFAF6E',
+            Missing: '#AFAF6E', // TODO when we clean up the data, this can go away
+            "": '#AFAF6E' // TODO when we clean up the data, this can go away
+        };
+        return booleanColors[d];
+    }
+    // The key names listed below match the column names in the Firebase table:
+    //
+    // The keys for each data item are used to render the legend on the map, and
+    // to populate the options on the 'add accident' page.
+    //
+    // Key details:
+    //   description:
+    //   type: Used to determine how to render the add accident form
+    //   options: For 'list' types, the list of valid options.
+    //   colors: A function that maps a value to a color. Used by the D3 library
+    //     to pick the color of the data point (and render the legend). If not
+    //     provided category10 is used.
     return {
         bike_injur: {
-            description: "Bicyclist Injury",
-            type: "list",
+            description: 'Bicyclist Injury',
+            type: 'list',
             options: injuries
         },
         bike_sex: {
-            description: "Bicyclist Gender",
-            type: "list",
-            options: genders
+            description: 'Bicyclist Gender',
+            type: 'list',
+            options: genders,
+            colors: booleanColorsFunction
         },
         ambulancer: {
-            description: "Ambulance Called",
-            type: "boolean"
+            description: 'Ambulance Called',
+            type: 'boolean',
+            colors: booleanColorsFunction
         },
         bike_alc_d: {
-            description: "Bicyclist Drunk",
-            type: "boolean"
+            description: 'Bicyclist Drunk',
+            type: 'boolean',
+            colors: booleanColorsFunction
         },
         bike_pos: {
-            description: "Bicyclist Location"
+            description: 'Bicyclist Location'
         },
         bike_race: {
-            description: "Bicyclist Race",
-            type: "list",
+            description: 'Bicyclist Race',
+            type: 'list',
             options: races
         },
         drvr_alc_d: {
-            description: "Driver Drunk",
-            type: "boolean"
+            description: 'Driver Drunk',
+            type: 'boolean',
+            colors: booleanColorsFunction
         },
         drvr_estsp: {
-            description: "Driver Speed",
-            type: "list",
+            description: 'Driver Speed',
+            type: 'list',
             options: [
-                "Unknown",
-                "0-5 mph",
-                "6-10 mph",
-                "11-15 mph",
-                "16-20 mph",
-                "21-25 mph",
-                "26-30 mph",
-                "31-35 mph",
-                "36-40 mph",
-                "41-45 mph",
-                "46-50 mph",
-                "51-55 mph",
-                "56-60 mph"
+                'Unknown',
+                '0-5 mph',
+                '6-10 mph',
+                '11-15 mph',
+                '16-20 mph',
+                '21-25 mph',
+                '26-30 mph',
+                '31-35 mph',
+                '36-40 mph',
+                '41-45 mph',
+                '46-50 mph',
+                '51-55 mph',
+                '56-60 mph'
             ]
         },
         drvr_injur: {
-            description: "Driver Injury",
-            type: "list",
+            description: 'Driver Injury',
+            type: 'list',
             options: injuries
         },
         drvr_race: {
-            description: "Driver Race",
-            type: "list",
+            description: 'Driver Race',
+            type: 'list',
             options: races
         },
         drvr_sex: {
-            description: "Driver Gender",
-            type: "list",
-            options: genders
+            description: 'Driver Gender',
+            type: 'list',
+            options: genders,
+            colors: booleanColorsFunction
         },
         weather: {
-            description: "Weather",
-            type: "list",
+            description: 'Weather',
+            type: 'list',
             options: [
-                "Unknown",
-                "Clear",
-                "Cloudy",
-                "Rain"
+                'Unknown',
+                'Clear',
+                'Cloudy',
+                'Rain'
             ]
         }
     };
 });
 
 OCEM.service('getPaths', function($http) {
-    return $http.get("/data/durham-bike-lanes.topojson");
+    return $http.get('/data/durham-bike-lanes.topojson');
 });
 
 OCEM.service('getCrashes', function($q, $firebase) {
     $('#pleaseWaitDialog').modal('show');
     var deferred = $q.defer();
-    var ref = new Firebase("https://bikesafety.firebaseio.com/Crashes");
+    var ref = new Firebase('https://bikesafety.firebaseio.com/Crashes');
     ref.once('value', function(snapshot){
         deferred.resolve(snapshot.val());
         $('#pleaseWaitDialog').modal('hide');
@@ -132,7 +161,7 @@ OCEM.service('getCrashes', function($q, $firebase) {
 OCEM.service('getCrashesUserSubmitted', function($q, $firebase) {
     $('#pleaseWaitDialog').modal('show');
     var deferred = $q.defer();
-    var ref = new Firebase("https://bikesafety.firebaseio.com/CrashesUserSubmitted");
+    var ref = new Firebase('https://bikesafety.firebaseio.com/CrashesUserSubmitted');
     ref.once('value', function(snapshot){
         deferred.resolve({
           data: _.values(snapshot.val()),
