@@ -33,14 +33,21 @@ function ($scope, leafletData, getCrashes, getCrashesUserSubmitted, datasetSetti
     $scope.setupAccidentColors = function() {
         $scope.colorAccidentsBy = $('#color_combo option:selected').val();
         $scope.categoryColors = d3.scale.category10();
-        if ('colors' in $scope.keyToHumanReadables[$scope.colorAccidentsBy]) {
-            $scope.categoryColors = $scope.keyToHumanReadables[$scope.colorAccidentsBy].colors;
+        var dataSettings = $scope.keyToHumanReadables[$scope.colorAccidentsBy];
+        if ('colors' in dataSettings) {
+            $scope.categoryColors = dataSettings.colors;
         }
         // Trim the bike_injur field b/c some of the fields have " Injury"
         // and others have "Injury".
         $scope.accidentLabel = d3.set($scope.crashes.concat($scope.userCrashes).map(function(d) {
             return $.trim(d[$scope.colorAccidentsBy]);
         })).values();
+        if ('options' in dataSettings) {
+          // Append any missing values to the end of the values that we expect
+          // for this data type:
+          var extraValues = _.difference($scope.accidentLabel,dataSettings.options);
+          $scope.accidentLabel = dataSettings.options.concat(extraValues);
+        }
         $scope.accidentColor = _.map($scope.accidentLabel, function(type) {
             return $scope.categoryColors(type);
         });
