@@ -18,12 +18,15 @@ OCEM.config(['$routeProvider', '$locationProvider', function($routeProvider, $lo
     });
 }]);
 
-function makeMapColoredLinearly(arr,fromColor,toColor) {
+function makeMapColoredLinearly(arr,colors) {
   var result = {};
+  var domainIntervals = d3.scale.ordinal()
+      .domain(_.range(colors.length))
+      .rangePoints([0,arr.length-1]);
   var arrayColorsFunction = d3.scale.linear()
-      .domain([0,arr.length-1])
+      .domain(domainIntervals.range())
       .interpolate(d3.interpolateRgb)
-      .range([fromColor,toColor]);
+      .range(colors);
   _.forEach(arr,function(val,index) {
       result[val] = arrayColorsFunction(index);
   });
@@ -62,7 +65,6 @@ OCEM.service('datasetSettings', function() {
     };
     var speeds = [
         'Unknown',
-        '',
         '0-5 mph',
         '6-10 mph',
         '11-15 mph',
@@ -76,7 +78,7 @@ OCEM.service('datasetSettings', function() {
         '51-55 mph',
         '56-60 mph'
     ];
-    var speedColorMap = makeMapColoredLinearly(speeds.slice(2),colorbrewer.PuBu[9][0],colorbrewer.PuBu[9][8]);
+    var speedColorMap = makeMapColoredLinearly(speeds.slice(1),colorbrewer.RdYlGn[10].reverse());
     // TODO when the data is cleaned up this can go away
     speedColorMap.Unknown = '#AFAF6E';
     speedColorMap[''] = '#AFAF6E';
