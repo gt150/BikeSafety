@@ -62,17 +62,17 @@ angular.module('BikeSafety').controller('addAccidentController', ['$scope','$loc
 function ($scope, $location, getCrashesUserSubmitted, datasetSettings) {
   $scope.questions = datasetSettings;
 
-  $scope.ambulancer = false;
+  $scope.ambulancer = "Unknown";
   $scope.weather = "Unknown";
   $scope.bike_injur = "Unknown";
   $scope.bike_sex = "Unknown";
   $scope.bike_race = "Unknown";
-  $scope.bike_alc_d = false;
+  $scope.bike_alc_d = "Unknown";
   $scope.drvr_injur = "Unknown";
   $scope.drvr_sex = "Unknown";
   $scope.drvr_race = "Unknown";
   $scope.drvr_estsp = "Unknown";
-  $scope.drvr_alc_d = false;
+  $scope.drvr_alc_d = "Unknown";
   $scope.center = {
     lat: 35.9886,
     lng: -78.9072,

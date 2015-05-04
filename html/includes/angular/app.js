@@ -34,6 +34,11 @@ function makeMapColoredLinearly(arr,colors) {
 }
 
 OCEM.service('datasetSettings', function() {
+    var booleans = [
+        'Unknown',
+        'Yes',
+        'No'
+    ];
     var injuries = [
         'Unknown',
         'O: No Injury',
@@ -112,13 +117,15 @@ OCEM.service('datasetSettings', function() {
         },
         ambulancer: {
             description: 'Ambulance Called',
-            type: 'boolean',
+            type: 'list',
+            options: booleans,
             colors: booleanColorsFunction
         },
         bike_alc_d: {
             description: 'Bicyclist Drunk',
-            type: 'boolean',
-            colors: booleanColorsFunction
+            type: 'list',
+            options: booleans,
+            colors: booleanColorsFunction,
         },
         bike_pos: {
             description: 'Bicyclist Location'
@@ -130,7 +137,8 @@ OCEM.service('datasetSettings', function() {
         },
         drvr_alc_d: {
             description: 'Driver Drunk',
-            type: 'boolean',
+            type: 'list',
+            options: booleans,
             colors: booleanColorsFunction
         },
         drvr_estsp: {

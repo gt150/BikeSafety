@@ -24,10 +24,9 @@ div.container-fluid#add_accident
                   h2.panel-title Accident
                 div.panel-body
                   div.form-group
-                    div.checkbox
-                      label
-                        input(type="checkbox" ng-model="ambulancer")
-                        | {{ questions.ambulancer.description }}
+                    label {{ questions.ambulancer.description}}:
+                    select.form-control(ng-model="ambulancer")
+                      option(ng-repeat="v in questions.ambulancer.options") {{v}}
 
                     label {{ questions.weather.description}}:
                     select.form-control(ng-model="weather")
@@ -55,10 +54,9 @@ div.container-fluid#add_accident
                     select.form-control(ng-model="bike_race")
                       option(ng-repeat="v in questions.bike_race.options") {{v}}
 
-                    div.checkbox
-                      label
-                        input(type="checkbox" ng-model="bike_alc_d")
-                        | {{ questions.bike_alc_d.description }}
+                    label {{ questions.bike_alc_d.description}}:
+                    select.form-control(ng-model="bike_alc_d")
+                      option(ng-repeat="v in questions.bike_alc_d.options") {{v}}
             div.col-md-4
               div.panel.panel-default
                 div.panel-heading
@@ -82,10 +80,9 @@ div.container-fluid#add_accident
                     select.form-control(ng-model="drvr_estsp")
                       option(ng-repeat="v in questions.drvr_estsp.options") {{v}}
 
-                    div.checkbox
-                      label
-                        input(type="checkbox" ng-model="drvr_alc_d")
-                        | {{ questions.drvr_alc_d.description }}
+                    label {{ questions.drvr_alc_d.description}}:
+                    select.form-control(ng-model="drvr_alc_d")
+                      option(ng-repeat="v in questions.drvr_alc_d.options") {{v}}
       div.panel-footer
         div.row
           div.col-xs-12
