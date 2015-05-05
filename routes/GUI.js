@@ -23,7 +23,7 @@ module.exports = function (app) {
 
     app.get('/api/refreshCrashMapping', function(req, res) {
        var f = require('../lib/associateCrashesToRoads');
-       f('https://bikesafety.firebaseio.com', 'html/src/data/durham-bike-lanes.geojson');
+       f('https://bikesafety.firebaseio.com', 'html/src/data/durham-bike-lanes.geojson', 'Crashes_Sanitzed');
        res.send("Processing");
     });
 };

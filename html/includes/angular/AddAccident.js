@@ -1,63 +1,73 @@
-var crashTemplate = {
-    ambulancer: '',
-    bike_age: '',
-    bike_alc_d: '',
-    bike_dir: '',
-    bike_injur: '',
-    bike_pos: '',
-    bike_race: '',
-    bike_sex: '',
-    city: 'Durham',
-    county: 'Durham',
-    crash_date: '',
-    crash_grp: '',
-    crash_hour: '',
-    crash_loc: '',
-    crash_mont: '',
-    crash_time: '',
-    crash_ty_1: '',
-    crash_type: '',
-    crash_year: '',
-    crashalcoh: '',
-    crashday: '',
-    crsh_sevri: '',
-    developmen: '',
-    drvr_age: '',
-    drvr_alc_d: '',
-    drvr_estsp: '',
-    drvr_injur: '',
-    drvr_race: '',
-    drvr_sex: '',
-    drvr_vehty: '',
-    drvrage_gr: '',
-    excsspdind: '',
-    fid: '',
-    hit_run: '',
-    latitude: '',
-    light_cond: '',
-    locality: '',
-    location: '',
-    longitude: '',
-    num_lanes: '',
-    num_units: '',
-    objectid: '',
-    rd_charact: '',
-    rd_class: '',
-    rd_conditi: '',
-    rd_config: '',
-    rd_defects: '',
-    rd_feature: '',
-    rd_surface: '',
-    region: '',
-    rural_urba: '',
-    speed_limi: '',
-    traff_cntr: '',
-    weather: '',
-    workzone_i: ''
-};
+function mixin(a, b) {
+    for (var p in b) {
+        a[p] = b[p];
+    }
+
+    return a;
+}
+
+function person(extra) {
+    return mixin({
+      age: 'Unknown',
+      alcohol: 'Unknown',
+      injury: 'Unknown',
+      race: 'Unknown',
+      sex: 'Unknown'
+    }, extra);
+}
+
+function submitCrash(result, data) {
+    var crashTemplate = {
+        biker: person({
+            direction: 'Unknown',
+            position: 'Unknown'
+        }),
+        driver: person({
+            estimated_speed: 'Unknown',
+            vehicle_type: 'Unknown'
+        }),
+        crash: {
+            ambulence: 'Unknown',
+            group: 'Unknown',
+            hit_and_run: 'Unknown',
+            light_conditions: 'Unknown',
+            location: 'Unknown',
+            road_conditions: 'Unknown',
+            road_defects: 'Unknown',
+            timestamp: 'Unknown',
+            type: 'Unknown',
+            weather: 'Unknown',
+            workzone: 'Unknown'
+        },
+        location: {
+            characteristics: 'Unknown',
+            city: 'Durham',
+            class: 'Unknown',
+            configuration: 'Unknown',
+            county: 'Durham',
+            development: 'Unknown',
+            feature: 'Unknown',
+            lanes: 'Unknown',
+            latitude: 'Unknown',
+            locality: 'Unknown',
+            longitude: 'Unknown',
+            region: 'Unknown',
+            rural_urban: 'Unknown',
+            speed_limit: 'Unknown',
+            surface: 'Unknown',
+            traffic_control: 'Unknown'
+        }
+    };
+
+    for (cat in data) {
+        mixin(crashTemplate[cat], data[cat]);
+    }
+
+    var crash = result.db.push();
+    crash.set(crashTemplate);
+}
 
 // TODO add deafult 'unknown' value to all the comboboxes.
-
 angular.module('BikeSafety').controller('addAccidentController', ['$scope','$location','getCrashesUserSubmitted','datasetSettings',
 function ($scope, $location, getCrashesUserSubmitted, datasetSettings) {
   $scope.questions = datasetSettings;
@@ -119,23 +129,29 @@ function ($scope, $location, getCrashesUserSubmitted, datasetSettings) {
     // when the new accident has been added.
     var dataset;
     getCrashesUserSubmitted.then(function(result) {
-        var accident = _.clone(crashTemplate);
-        accident.ambulancer = $scope.ambulancer ? "Yes":"No";
-        accident.weather = $scope.weather;
-        accident.bike_injur = $scope.bike_injur;
-        accident.bike_sex = $scope.bike_sex;
-        accident.bike_race = $scope.bike_race;
-        accident.bike_alc_d = $scope.bike_alc_d ? "Yes":"No";
-        accident.drvr_injur = $scope.drvr_injur;
-        accident.drvr_sex = $scope.drvr_sex;
-        accident.drvr_race = $scope.drvr_race;
-        accident.drvr_estsp = $scope.drvr_estsp;
-        accident.drvr_alc_d = $scope.drvr_alc_d ? "Yes":"No";
-        accident.latitude = $scope.markers.Location.lat;
-        accident.longitude = $scope.markers.Location.lng;
-
-        var crash = result.db.push();
-        crash.set(accident);
+        submitCrash(result, {
+            biker: {
+                injury: $scope.bike_injur,
+                sex: $scope.bike_sex,
+                race: $scope.bike_race,
+                alcohol: $scope.bike_alc_d
+            },
+            driver: {
+                injury: $scope.drvr_injur,
+                sex: $scope.drvr_sex,
+                race: $scope.drvr_race,
+                estimated_speed: $scope.drvr_estsp,
+                alcohol: $scope.drvr_alc_d
+            },
+            crash: {
+                ambulance: $scope.ambulancer,
+                weather: $scope.weather
+            },
+            location: {
+                latitude: $scope.markers.Location.lat,
+                longitude: $scope.markers.Location.lng
+            }
+        });
         $scope.accidentPosted = true;
     });
   };
