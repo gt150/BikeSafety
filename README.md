@@ -23,6 +23,8 @@ You only need [Node.js](http://nodejs.org) to develop this platform. Install tha
     npm install
     npm start
 
+`npm start` will open a server on port 3000 of your computer. Go there to view the app.
+
 Test
 ====
 
