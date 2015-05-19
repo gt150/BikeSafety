@@ -1,7 +1,7 @@
 Overview
 --------
 
-A snapshot of the master branch is [on heroku](http://desolate-garden-4742.herokuapp.com/). This has been continuous integration server setup with [codeship](https://codeship.com) - ping @dsummersl if its not working for you!
+A snapshot of the master branch is [on heroku](http://bikesafetee.herokuapp.com/). This has been continuous integration server setup with Heroku - ping @dsummersl if its not working for you!
 
 TODO
 ====
