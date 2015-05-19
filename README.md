@@ -1,7 +1,7 @@
 Overview
 --------
 
-A snapshot of the master branch is [on heroku](http://desolate-garden-4742.herokuapp.com/).
+A snapshot of the master branch is [on heroku](http://desolate-garden-4742.herokuapp.com/). This has been continuous integration server setup with [codeship](https://codeship.com) - ping @dsummersl if its not working for you!
 
 TODO
 ====
@@ -11,9 +11,15 @@ TODO
 Overview
 ========
 
-The project uses [Angular]() and [Express]() for the frontend and backend respectively. The database is hosted on [Firebase](http://firebase.com).
+The project uses [Angular]() and [Express]() for the frontend and backend respectively. 
 
 The project uses NPM to manage server side dependences and bower for angular dependencies. The `npm install` will install both of these dependencies for you.
+
+**Frontend**
+
+**Server**
+
+**Database**: The database is hosted on [Firebase](http://firebase.com).
 
 Run
 ===
