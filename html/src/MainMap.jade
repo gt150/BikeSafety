@@ -13,7 +13,7 @@ div.panel.panel-default#legend(Title="Legend")
 
       div.inline Color accidents by&nbsp;&nbsp;
       select#color_combo
-          option(ng-repeat="(key,value) in keyToHumanReadables" value="{{key}}" ng-selected="{{colorAccidentsBy == key}}") {{keyToHumanReadables[key].description}}
+        option(ng-repeat="(key,value) in keyToHumanReadables" value="{{key}}" ng-selected="{{colorAccidentsBy == key}}") {{value}}
       div.accidentLegend
           div.rows
           hr

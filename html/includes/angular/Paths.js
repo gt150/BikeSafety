@@ -17,7 +17,7 @@ function ($scope, leafletData, getPaths) {
             });
             $scope.highestWrecks = 0;
             $scope.crashes.forEach(function (accident) {
-                if (accident.city.toString() == 'Durham' && accident.rd_ids) {
+                if (accident.location.city == 'Durham' && accident.rd_ids) {
                     accident.rd_ids.forEach(function (road_id) {
                         var currFeature = _.find(roads, function(r) { return r.id == road_id; });
                         currFeature.severityCount++;
@@ -53,7 +53,7 @@ function ($scope, leafletData, getPaths) {
                 });
 
             $scope.d3selection.selectAll('.bikepath')
-                .data(roads, function(d) { return d.id; })
+                .data(roads)
                 .attr('d',path)
                 .attr('stroke-width', $scope.widthScale(zoom) +'px')
                 .enter().append('svg:path')
@@ -74,7 +74,7 @@ function ($scope, leafletData, getPaths) {
                 .attr('class','bikepath');
         });
     };
-    $scope.showRoad = true;
+    $scope.showRoad = false;
     $scope.$watch('leafletLoaded', function(newValue, oldValue) {
         if (!newValue) { return; }
         $scope.change();

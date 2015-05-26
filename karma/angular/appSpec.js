@@ -28,7 +28,7 @@ describe("app.js", function() {
             });
         });
 
-        it("interpolateo for three colors & four values", function() {
+        it("interpolates for three colors & four values", function() {
             var result = makeMapColoredLinearly([1,2,3,4],['#000000','#0066ff','#ffffff']);
             expect(result).toEqual({
                 1: '#000000',
@@ -36,6 +36,30 @@ describe("app.js", function() {
                 3: '#5599ff',
                 4: '#ffffff'
             });
+        });
+
+        // TODO need a list of all the metrics:
+        // Bicyclist Speed
+        // Driver Speed
+        // Crash
+    });
+
+    describe('dataSettings()', function() {
+        var dataSettings;
+
+        beforeEach(function() {
+            module('BikeSafety');
+            inject(function(_dataSettings_) {
+                dataSettings = _dataSettings_;
+            });
+        });
+
+        it('description("biker","alcohol") returns a human readable value', function() {
+            expect(dataSettings.description('biker','alcohol')).toEqual('Bicyclist Drunk?');
+        });
+
+        it('data("biker","alcohol") returns biker.alcohol data', function() {
+            expect(dataSettings.data('biker','alcohol').description).toEqual('Bicyclist Drunk?');
         });
     });
 });
