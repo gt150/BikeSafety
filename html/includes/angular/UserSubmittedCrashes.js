@@ -8,11 +8,13 @@ function ($scope, leafletData) {
     var updateMapFn = function(selection,projection) {
         var zoom = $scope.map.getZoom();
         var eachSquare = function(d) {
-            var p = projection.latLngToLayerPoint(L.latLng(d.latitude, d.longitude));
+            var p = projection.latLngToLayerPoint(L.latLng(d.location.latitude, d.location.longitude));
             var s = d3.select(this);
             s.attr('x', p.x);
             s.attr('y', p.y);
-            s.attr('fill', function(d) { return $scope.categoryColors($.trim(d[$scope.colorAccidentsBy])); });
+            s.attr('fill', function(d) {
+                return $scope.categoryColors($scope.getDataForOptionString($scope.selectedOption,d));
+            });
             s.attr('width', $scope.widthScale(zoom)*2);
             s.attr('height', $scope.widthScale(zoom)*2);
         };

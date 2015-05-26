@@ -24,13 +24,13 @@ div.container-fluid#add_accident
                   h2.panel-title Accident
                 div.panel-body
                   div.form-group
-                    label {{ questions.ambulancer.description}}:
-                    select.form-control(ng-model="ambulancer")
-                      option(ng-repeat="v in questions.ambulancer.options") {{v}}
+                    label {{ dataSettings.description('crash','ambulance') }}:
+                    select.form-control(ng-model="ambulance")
+                      option(ng-repeat="v in dataSettings.data('crash','ambulance').options") {{v}}
 
-                    label {{ questions.weather.description}}:
+                    label {{ dataSettings.description('crash','weather') }}:
                     select.form-control(ng-model="weather")
-                      option(ng-repeat="v in questions.weather.options") {{v}}
+                      option(ng-repeat="v in dataSettings.data('crash','weather').options") {{v}}
 
                     label Accident Location:
                     leaflet#pick_location(center="center" layers="layers" markers="markers")
@@ -42,21 +42,21 @@ div.container-fluid#add_accident
                   h2.panel-title Bicyclist
                 div.panel-body
                   div.form-group
-                    label {{ questions.bike_injur.description}}:
-                    select.form-control(ng-model="bike_injur")
-                      option(ng-repeat="v in questions.bike_injur.options") {{v}}
+                    label {{ dataSettings.description('biker','injury') }}:
+                    select.form-control(ng-model="bike_injury")
+                      option(ng-repeat="v in dataSettings.data('biker','injury').options") {{v}}
 
-                    label {{ questions.bike_sex.description}}:
+                    label {{ dataSettings.description('biker','sex') }}:
                     select.form-control(ng-model="bike_sex")
-                      option(ng-repeat="v in questions.bike_sex.options") {{v}}
+                      option(ng-repeat="v in dataSettings.data('biker','sex').options") {{v}}
 
-                    label {{ questions.bike_race.description}}:
+                    label {{ dataSettings.description('biker','race') }}:
                     select.form-control(ng-model="bike_race")
-                      option(ng-repeat="v in questions.bike_race.options") {{v}}
+                      option(ng-repeat="v in dataSettings.data('biker','race').options") {{v}}
 
-                    label {{ questions.bike_alc_d.description}}:
-                    select.form-control(ng-model="bike_alc_d")
-                      option(ng-repeat="v in questions.bike_alc_d.options") {{v}}
+                    label {{ dataSettings.description('biker','alcohol') }}:
+                    select.form-control(ng-model="bike_alcohol")
+                      option(ng-repeat="v in dataSettings.data('biker','alcohol').options") {{v}}
             div.col-md-4
               div.panel.panel-default
                 div.panel-heading
@@ -64,25 +64,25 @@ div.container-fluid#add_accident
                 div.panel-body
                   div.form-group
 
-                    label {{ questions.drvr_injur.description}}:
-                    select.form-control(ng-model="drvr_injur")
-                      option(ng-repeat="v in questions.drvr_injur.options") {{v}}
+                    label {{ dataSettings.description('driver','injury') }}:
+                    select.form-control(ng-model="driver_injury")
+                      option(ng-repeat="v in dataSettings.data('driver','injury').options") {{v}}
 
-                    label {{ questions.drvr_sex.description}}:
-                    select.form-control(ng-model="drvr_sex")
-                      option(ng-repeat="v in questions.drvr_sex.options") {{v}}
+                    label {{ dataSettings.description('driver','sex') }}:
+                    select.form-control(ng-model="driver_sex")
+                      option(ng-repeat="v in dataSettings.data('driver','sex').options") {{v}}
 
-                    label {{ questions.drvr_race.description}}:
-                    select.form-control(ng-model="drvr_race")
-                      option(ng-repeat="v in questions.drvr_race.options") {{v}}
+                    label {{ dataSettings.description('driver','race') }}:
+                    select.form-control(ng-model="driver_race")
+                      option(ng-repeat="v in dataSettings.data('driver','race').options") {{v}}
 
-                    label {{ questions.drvr_estsp.description}}:
-                    select.form-control(ng-model="drvr_estsp")
-                      option(ng-repeat="v in questions.drvr_estsp.options") {{v}}
+                    label {{ dataSettings.description('driver','estimated_speed') }}:
+                    select.form-control(ng-model="driver_estimated_speed")
+                      option(ng-repeat="v in dataSettings.data('driver','estimated_speed').options") {{v}}
 
-                    label {{ questions.drvr_alc_d.description}}:
-                    select.form-control(ng-model="drvr_alc_d")
-                      option(ng-repeat="v in questions.drvr_alc_d.options") {{v}}
+                    label {{ dataSettings.description('driver','alcohol') }}:
+                    select.form-control(ng-model="driver_alcohol")
+                      option(ng-repeat="v in dataSettings.data('driver','alcohol').options") {{v}}
       div.panel-footer
         div.row
           div.col-xs-12

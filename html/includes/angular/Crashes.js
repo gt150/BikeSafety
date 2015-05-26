@@ -3,16 +3,18 @@ function ($scope, leafletData) {
     var updateMapFn = function(selection,projection) {
         var zoom = $scope.map.getZoom();
         var eachCircle = function(d) {
-            var p = projection.latLngToLayerPoint(L.latLng(d.latitude, d.longitude));
+            var p = projection.latLngToLayerPoint(L.latLng(d.location.latitude, d.location.longitude));
             var s = d3.select(this);
             s.attr('cx', p.x);
             s.attr('cy', p.y);
-            s.attr('fill', function(d) { return $scope.categoryColors($.trim(d[$scope.colorAccidentsBy])); });
+            s.attr('fill', function(d) {
+                return $scope.categoryColors($scope.getDataForOptionString($scope.selectedOption,d));
+            });
             s.attr('r', $scope.widthScale(zoom));
         };
         // TODO fade in with a transition() when the data is added
         selection.selectAll('.crash')
-            .data($scope.crashes, function(d) { return d.objectid; })
+            .data($scope.crashes)
             .each(eachCircle)
             .enter().append('svg:circle')
             .each(eachCircle)

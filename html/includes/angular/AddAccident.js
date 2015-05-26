@@ -67,22 +67,21 @@ function submitCrash(result, data) {
     crash.set(crashTemplate);
 }
 
-// TODO add deafult 'unknown' value to all the comboboxes.
-angular.module('BikeSafety').controller('addAccidentController', ['$scope','$location','getCrashesUserSubmitted','datasetSettings',
-function ($scope, $location, getCrashesUserSubmitted, datasetSettings) {
-  $scope.questions = datasetSettings;
+angular.module('BikeSafety').controller('addAccidentController', ['$scope','$location','getCrashesUserSubmitted','dataSettings',
+function ($scope, $location, getCrashesUserSubmitted, dataSettings) {
+  $scope.dataSettings = dataSettings;
 
-  $scope.ambulancer = "Unknown";
+  $scope.ambulance = "Unknown";
   $scope.weather = "Unknown";
-  $scope.bike_injur = "Unknown";
+  $scope.bike_injury = "Unknown";
   $scope.bike_sex = "Unknown";
   $scope.bike_race = "Unknown";
-  $scope.bike_alc_d = "Unknown";
-  $scope.drvr_injur = "Unknown";
-  $scope.drvr_sex = "Unknown";
-  $scope.drvr_race = "Unknown";
-  $scope.drvr_estsp = "Unknown";
-  $scope.drvr_alc_d = "Unknown";
+  $scope.bike_alcohol = "Unknown";
+  $scope.driver_injury = "Unknown";
+  $scope.driver_sex = "Unknown";
+  $scope.driver_race = "Unknown";
+  $scope.driver_estimated_speed = "Unknown";
+  $scope.driver_alcohol = "Unknown";
   $scope.center = {
     lat: 35.9886,
     lng: -78.9072,
@@ -107,44 +106,52 @@ function ($scope, $location, getCrashesUserSubmitted, datasetSettings) {
     }
   };
 
-  var updatePosition = function(position) {
-    $scope.lookingUpLocation = false;
-    $scope.center.lat = position.coords.latitude;
-    $scope.center.lng = position.coords.longitude;
-    $scope.markers.Location.lat = position.coords.latitude;
-    $scope.markers.Location.lng = position.coords.longitude;
-    $scope.$apply();
+  var updatePosition = function(position,skipApply) {
+      $scope.lookingUpLocation = false;
+      $scope.center.lat = position.coords.latitude;
+      $scope.center.lng = position.coords.longitude;
+      $scope.markers.Location.lat = position.coords.latitude;
+      $scope.markers.Location.lng = position.coords.longitude;
+      if (!skipApply) {
+          $scope.$apply();
+      }
   };
+  $scope.$on('leafletDirectiveMarker.dragend', function(event, args) {
+      updatePosition({
+          coords: {
+              latitude: args.model.lat,
+              longitude: args.model.lng
+          }
+      },true);
+  });
   var showPositionError = function(err) {
-    $scope.lookingUpLocation = false;
-    $scope.positionError = true;
+      $scope.lookingUpLocation = false;
+      $scope.positionError = true;
   };
   if (navigator.geolocation) {
-    $scope.lookingUpLocation = true;
-    navigator.geolocation.getCurrentPosition(updatePosition,showPositionError);
+      $scope.lookingUpLocation = true;
+      navigator.geolocation.getCurrentPosition(updatePosition,showPositionError);
   }
 
   $scope.addAccident = function() {
-    // TODO show some kind of status notification, maybe redirect to the map
-    // when the new accident has been added.
     var dataset;
     getCrashesUserSubmitted.then(function(result) {
         submitCrash(result, {
             biker: {
-                injury: $scope.bike_injur,
+                injury: $scope.bike_injury,
                 sex: $scope.bike_sex,
                 race: $scope.bike_race,
-                alcohol: $scope.bike_alc_d
+                alcohol: $scope.bike_alcohol
             },
             driver: {
-                injury: $scope.drvr_injur,
-                sex: $scope.drvr_sex,
-                race: $scope.drvr_race,
-                estimated_speed: $scope.drvr_estsp,
-                alcohol: $scope.drvr_alc_d
+                injury: $scope.driver_injury,
+                sex: $scope.driver_sex,
+                race: $scope.driver_race,
+                estimated_speed: $scope.driver_estimated_speed,
+                alcohol: $scope.driver_alcohol
             },
             crash: {
-                ambulance: $scope.ambulancer,
+                ambulance: $scope.ambulance,
                 weather: $scope.weather
             },
             location: {

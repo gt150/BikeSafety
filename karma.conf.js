@@ -16,12 +16,19 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'html/includes/bower/angular/angular.js',
+      'html/includes/bower/colorbrewer/colorbrewer.js',
       'html/includes/bower/angular-mocks/angular-mocks.js',
+      'html/includes/bower/angular-route/angular-route.js',
+      'html/includes/bower/angular-bootstrap/ui-bootstrap.js',
+      'html/includes/bower/firebase/firebase.js',
+      'html/includes/bower/angularfire/dist/angularfire.js',
+      'html/includes/bower/angular-leaflet-directive/dist/angular-leaflet-directive.min.js',
+      'html/includes/scripts/ui-utils.js',
       'html/includes/bower/d3/d3.js',
       'html/includes/bower/lodash/lodash.js',
-      'spec/**/*[sS]pec.js',
       'html/includes/angular/app.js',
-      'html/includes/angular/*.js'
+      'html/includes/angular/*.js',
+      'karma/**/*[sS]pec.js'
     ],
 
 
