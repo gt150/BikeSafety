@@ -72,3 +72,7 @@ body {
 .btn:focus {
   outline: none;
 }
+
+.hiddentext {
+  color: rgba(0,0,0,0);
+}

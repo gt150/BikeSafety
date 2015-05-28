@@ -35,7 +35,11 @@ div.container-fluid#add_accident
                     label Accident Location:
                     leaflet#pick_location(center="center" layers="layers" markers="markers")
 
-                    div TODO time of day/year/etc
+                    label Date & Time:
+                    div.input-group
+                      span.input-group-addon
+                        input(type="checkbox" ng-model="date_known")
+                      input.form-control(type="datetime-local" ng-model="date_time" ng-readonly="!date_known" ng-class="{ hiddentext: !date_known }")
             div.col-md-4
               div.panel.panel-default
                 div.panel-heading

@@ -82,6 +82,8 @@ function ($scope, $location, getCrashesUserSubmitted, dataSettings) {
   $scope.driver_race = "Unknown";
   $scope.driver_estimated_speed = "Unknown";
   $scope.driver_alcohol = "Unknown";
+  $scope.date_known = false;
+  $scope.date_time = new Date();
   $scope.center = {
     lat: 35.9886,
     lng: -78.9072,
@@ -152,7 +154,8 @@ function ($scope, $location, getCrashesUserSubmitted, dataSettings) {
             },
             crash: {
                 ambulance: $scope.ambulance,
-                weather: $scope.weather
+                weather: $scope.weather,
+                timestamp: $scope.date_known ? $scope.date_time.toISOString():"Unknown"
             },
             location: {
                 latitude: $scope.markers.Location.lat,
