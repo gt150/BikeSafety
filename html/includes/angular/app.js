@@ -123,6 +123,8 @@ biker.position = {
     description: 'Location'
 };
 biker.direction = {
+    options: ["Unknown","Facing Traffic","With Traffic",
+              "Not Applicable"],
     description: 'Direction'
 };
 _.each(biker, function(v) {
