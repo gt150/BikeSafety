@@ -40,11 +40,6 @@ var booleans = [
 ];
 var injuries = [
     'Unknown',
-    'O: No Injury',
-    'A: Disabling Injury',
-    'B: Evident Injury',
-    'C: Possible Injury',
-    'K: Killed'
 ];
 var races = [
     'Unknown',
@@ -103,7 +98,8 @@ var bikerAndDriver = {
     injury: {
         description: 'Injury',
         type: 'list',
-        options: injuries
+        options: ["Unknown","Disabling Injury","Evident Injury",
+                  "Killed", "No Injury", "Other Injury","Possible Injury"],
     },
     race: {
         description: 'Race',
@@ -120,6 +116,10 @@ var bikerAndDriver = {
 
 var biker = _.cloneDeep(bikerAndDriver);
 biker.position = {
+    options: ["Unknown","Bike Lane / Paved Shoulder","Driveway / Alley",
+            "Non-Roadway", "Not Applicable", "Other",
+            "Sidewalk / Crosswalk / Driveway Crossing",
+            ],
     description: 'Location'
 };
 biker.direction = {
