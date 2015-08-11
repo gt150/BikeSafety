@@ -19,7 +19,7 @@ The project uses NPM to manage server side dependences and bower for angular dep
 
 **Server**
 
-**Database**: The database is hosted on [Firebase](http://firebase.com).
+**Database**: The database is hosted on [Firebase](http://firebase.com). Our Database [is this link](https://bikesafety.firebaseio.com/).
 
 Run
 ===
