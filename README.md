@@ -1,6 +1,10 @@
 Overview
 --------
 
+Isidro Razo, 49, was the latest bike rider to die on his way to work in Durham on May 25th on Angier Avenue. That makes four bike-related victims in the past 6 months in Durham. Despite deadly and risky biking conditions in Durham, the transition to a more bike-friendly community is slow and infrastructure budgets are not being accelerated. Policy makers need good data to know where to prioritize new bike plan infrastructure to make roadways safer. Bikers and would-be bikers need to know the safest routes and danger zones as they begin to bike more often to more places.
+
+The application includes color-coded bike routes based on relative risk of accidents using the NC bike crash database and biker reported incidents, based on the number of crashes, time of day, etc. It also highlights troublesome intersections.
+
 A snapshot of the master branch is [on heroku](http://bikesafetee.herokuapp.com/). This has been continuous integration server setup with Heroku - ping @dsummersl if its not working for you!
 
 TODO
